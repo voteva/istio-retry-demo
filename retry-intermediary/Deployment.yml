@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: retry-intermediary
+  namespace: retry-test-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: retry-intermediary
+  template:
+    metadata:
+      labels:
+        app: retry-intermediary
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: retry-intermediary
+          image: tanyavoteva/retry-intermediary
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: intermediary.base.url
+              value: 'http://retry-endpoint.retry-test-project.svc.cluster.local'
+            - name: endpoint.host
+              value: retry-endpoint.retry-test-project.svc.cluster.local

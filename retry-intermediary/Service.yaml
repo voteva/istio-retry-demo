@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: retry-intermediary
+  namespace: retry-test-project
+spec:
+  selector:
+    app: retry-intermediary
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

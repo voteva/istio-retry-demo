@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: retry-endpoint
+  namespace: retry-test-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: retry-endpoint
+  template:
+    metadata:
+      labels:
+        app: retry-endpoint
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: retry-endpoint
+          image: tanyavoteva/retry-endpoint
+          ports:
+            - containerPort: 8080
+              protocol: TCP

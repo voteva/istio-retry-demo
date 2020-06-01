@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: retry-endpoint
+  namespace: retry-test-project
+spec:
+  hosts:
+    - retry-endpoint
+  http:
+    - match:
+        - uri:
+            prefix: /abc
+        - uri:
+            prefix: /test
+      name: test1
+      route:
+        - destination:
+            host: retry-endpoint
+      timeout: 1s
+    - name: test2
+      route:
+        - destination:
+            host: retry-endpoint
+      timeout: 2s

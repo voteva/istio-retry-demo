@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: retry-endpoint
+  namespace: retry-test-project
+spec:
+  selector:
+    app: retry-endpoint
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

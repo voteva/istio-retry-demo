@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: retry-endpoint
+  namespace: retry-test-project
+spec:
+  hosts:
+    - retry-endpoint
+  http:
+    - retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 'gateway-error,connect-failure,refused-stream,5xx'
+      route:
+        - destination:
+            host: retry-endpoint
