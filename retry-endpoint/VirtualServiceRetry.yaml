@@ -7,10 +7,22 @@ spec:
   hosts:
     - retry-endpoint
   http:
-    - retries:
-        attempts: 3
+    - match:
+        - uri:
+            prefix: /abc
+      name: test1
+      retries:
+        attempts: 1
+        perTryTimeout: 1s
+        retryOn: 'retriable-4xx'
+      route:
+        - destination:
+            host: retry-endpoint
+    - name: test2
+      retries:
+        attempts: 2
         perTryTimeout: 2s
-        retryOn: 'gateway-error,connect-failure,refused-stream,5xx'
+        retryOn: '5xx,reset'
       route:
         - destination:
             host: retry-endpoint
