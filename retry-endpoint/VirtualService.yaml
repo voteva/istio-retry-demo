@@ -9,4 +9,4 @@ spec:
   http:
     - route:
       - destination:
-        host: retry-endpoint
+          host: retry-endpoint

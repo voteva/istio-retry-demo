@@ -22,10 +22,11 @@ public class EndpointController {
 
     @RequestMapping("random")
     public ResponseEntity<Mono<String>> withRandomResponse(@RequestParam(value = "durationMs", defaultValue = "0") long durationMs) {
-        log.info("Path: '{}', Receive request. Duration: '{}'", "random", durationMs);
+        int statusCode = helperService.getRandomStatusCode();
+        log.info("Path: '{}', Duration: '{}', Status code: '{}'", "random", durationMs, statusCode);
         return ResponseEntity
-                .status(helperService.getRandomStatusCode())
-                .body(Mono.just(format("DurationMs: %s, statusCode: random", durationMs))
+                .status(statusCode)
+                .body(Mono.just(format("DurationMs: %s, statusCode: %s", durationMs, statusCode))
                         .delayElement(ofMillis(durationMs)));
     }
 
@@ -33,7 +34,7 @@ public class EndpointController {
     public ResponseEntity<Mono<String>> withStatus(@PathVariable(value = "path", required = false) String path,
                                                    @RequestParam(value = "statusCode", defaultValue = "200") int statusCode,
                                                    @RequestParam(value = "durationMs", defaultValue = "0") long durationMs) {
-        log.info("Path: '{}', Receive request with params: durationMs: '{}', statusCode '{}'", path, durationMs, statusCode);
+        log.info("Path: '{}', DurationMs: '{}', StatusCode '{}'", path, durationMs, statusCode);
         return ResponseEntity
                 .status(statusCode)
                 .body(Mono.just(format("DurationMs: %s, statusCode: %s", durationMs, statusCode))
