@@ -7,6 +7,32 @@ spec:
   hosts:
     - retry-endpoint
   http:
-    - route:
-      - destination:
-          host: retry-endpoint
+    - match:
+        - method:
+            exact: PUT
+          uri:
+            exact: /abc
+      name: retry-abc-put-409
+      retries:
+        attempts: 1
+        perTryTimeout: 1s
+        retryOn: 'retriable-4xx'
+      route:
+        - destination:
+            host: retry-endpoint
+    - match:
+        - method:
+            exact: GET
+      name: retry-all-get
+      retries:
+        attempts: 2
+        perTryTimeout: 2s
+        retryOn: '5xx,reset'
+      route:
+        - destination:
+            host: retry-endpoint
+      timeout: 5s
+    - name: other
+      route:
+        - destination:
+            host: retry-endpoint
