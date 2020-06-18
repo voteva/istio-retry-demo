@@ -1,6 +1,6 @@
-package com.voteva.istio.retry.controller;
+package istio.retry.controller;
 
-import com.voteva.istio.retry.service.HelperService;
+import istio.retry.service.HelperService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,11 @@ import static java.time.Duration.ofMillis;
 public class EndpointController {
 
     private final HelperService helperService;
+
+    @RequestMapping("health")
+    public void health() {
+        log.info("Health OK");
+    }
 
     @RequestMapping("random")
     public ResponseEntity<Mono<String>> withRandomResponse(

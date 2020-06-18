@@ -1,4 +1,4 @@
-package com.voteva.istio.retry.config;
+package istio.retry.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

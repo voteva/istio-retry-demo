@@ -1,12 +1,12 @@
-package com.voteva.istio.retry;
+package istio.retry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IntermediaryApplication {
+public class EndpointApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(IntermediaryApplication.class, args);
+        SpringApplication.run(EndpointApplication.class, args);
     }
 }

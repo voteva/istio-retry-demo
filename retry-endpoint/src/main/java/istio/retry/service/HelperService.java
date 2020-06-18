@@ -1,4 +1,4 @@
-package com.voteva.istio.retry.service;
+package istio.retry.service;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

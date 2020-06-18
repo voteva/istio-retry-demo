@@ -1,4 +1,4 @@
-package com.voteva.istio.retry.controller;
+package istio.retry.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

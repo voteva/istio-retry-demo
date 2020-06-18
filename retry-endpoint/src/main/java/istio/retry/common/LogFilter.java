@@ -1,4 +1,4 @@
-package com.voteva.istio.retry.common;
+package istio.retry.common;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
