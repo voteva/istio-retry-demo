@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mirroring-app-v1
+  namespace: retry-test-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mirroring-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: mirroring-app
+        version: v1
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: mirroring-app
+          image: tanyavoteva/mirroring-app
+          ports:
+            - containerPort: 8080
+              protocol: TCP

@@ -11,6 +11,7 @@
 
     <modules>
         <module>healthcheck-app</module>
+        <module>mirroring-app</module>
         <module>retry-intermediary</module>
         <module>retry-endpoint</module>
     </modules>

@@ -21,11 +21,6 @@ public class EndpointController {
 
     private final HelperService helperService;
 
-    @RequestMapping("health")
-    public void health() {
-        log.info("Health OK");
-    }
-
     @RequestMapping("random")
     public ResponseEntity<Mono<String>> withRandomResponse(
             @RequestParam(value = "durationMs", defaultValue = "0", required = false) long durationMs) {
