@@ -14,6 +14,7 @@
         <module>mirroring-app</module>
         <module>retry-intermediary</module>
         <module>retry-endpoint</module>
+        <module>sample-app</module>
     </modules>
 
     <parent>

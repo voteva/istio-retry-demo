@@ -1,0 +1,30 @@
+# use for testing fault injection and retry together
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: retry-endpoint
+  namespace: retry-test-project
+spec:
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_INBOUND
+        listener:
+          filterChain:
+            filter:
+              name: envoy.http_connection_manager
+              subFilter:
+                name: envoy.router
+          portNumber: 8080
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          config:
+            delay:
+              fixedDelay: 10s
+              percentage:
+                numerator: 100
+          name: envoy.fault
+  workloadSelector:
+    labels:
+      app: retry-endpoint

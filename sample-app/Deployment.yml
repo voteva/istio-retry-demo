@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: mirroring-app
+        version: v1
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: sample-app
+          image: tanyavoteva/sample-app
+          ports:
+            - containerPort: 8080
+              protocol: TCP
